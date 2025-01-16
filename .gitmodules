@@ -1,0 +1,4 @@
+[submodule "external/Arcade-Bagman_MiSTer"]
+	path = external/Arcade-Bagman_MiSTer
+	url = git@github.com:obsidian-dot-dev/Arcade-Bagman_MiSTer.git
+	branch = master

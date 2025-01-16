@@ -1,0 +1,26 @@
+{
+	"instance":{
+		"magic": "APF_VER_1",
+		"variant_select": {
+			"id": 0,
+			"select": false
+		},
+		"data_path": "",
+		"data_slots": [
+			{
+				"id": 1,
+				"filename": "pickin.rom"
+			}
+		],
+		"memory_writes": [
+			{
+				"address": "0x10000000",
+				"data": "0x00000002"
+			},
+			{
+				"address": "0x20000000",
+				"data": "0x000000FD"
+			}			
+		]		
+	}
+}
