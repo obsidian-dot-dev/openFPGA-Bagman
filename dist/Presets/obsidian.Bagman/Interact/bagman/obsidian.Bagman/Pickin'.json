@@ -1,0 +1,129 @@
+{
+	"interact":{
+		"magic": "APF_VER_1",
+		"variables": [	
+            {
+				"name": "Coinage",
+				"id": 0,
+				"type": "list",
+				"enabled": true,
+				"persist": true,
+				"address": "0x20000000",
+				"writeonly": true,
+				"defaultval": 1,
+				"mask": "0xFFFFFFFE",
+				"options": [
+				  {
+					"value": 1,
+					"name": "2 coins/credit"
+				  },
+				  {
+					"value": 0,
+					"name": "1 coin/credit"
+				  }
+				]
+			},
+			{
+				"name": "Lives",
+				"id": 1,
+				"type": "list",
+				"enabled": true,
+				"persist": true,
+				"address": "0x30000000",
+				"writeonly": true,
+				"defaultval": 2,
+				"mask": "0xFFFFFFFC",
+				"options": [
+				  {
+					"value": 3,
+					"name": "5"
+				  },
+				  {
+					"value": 2,
+					"name": "4"
+				  },
+				  {
+					"value": 1,
+					"name": "3"
+				  },
+                  {
+					"value": 0,
+					"name": "2"
+				  }                  
+				]
+			},
+            {
+				"name": "Free Play",
+				"id": 2,
+				"type": "list",
+				"enabled": true,
+				"persist": true,
+				"address": "0x40000000",
+				"writeonly": true,
+				"defaultval": 2,
+				"mask": "0xFFFFFFFE",
+				"options": [
+				  {
+					"value": 1,
+					"name": "On"
+				  },
+				  {
+					"value": 0,
+					"name": "Off"
+				  }
+				]
+			},
+            {
+				"name": "Bonus",
+				"id": 3,
+				"type": "list",
+				"enabled": true,
+				"persist": true,
+				"address": "0x50000000",
+				"writeonly": true,
+				"defaultval": 1,
+				"mask": "0xFFFFFFFE",
+				"options": [
+				  {
+					"value": 1,
+					"name": "40000"
+				  },
+				  {
+					"value": 0,
+					"name": "30000"
+				  }   
+				]
+			},
+            {
+				"name": "Language",
+				"id": 4,
+				"type": "list",
+				"enabled": true,
+				"persist": true,
+				"address": "0x60000000",
+				"writeonly": true,
+				"defaultval": 1,
+				"mask": "0xFFFFFFFE",
+				"options": [
+				  {
+					"value": 1,
+					"name": "French"
+				  },
+				  {
+					"value": 0,
+					"name": "English"
+				  }   
+				]
+			},
+            {
+                "name": "Reset Core",
+                "id": 5,
+                "type": "action",
+                "enabled": true,
+                "address": "0x80000000",
+                "value": 1
+            }
+		],
+		"messages": []
+	}
+}

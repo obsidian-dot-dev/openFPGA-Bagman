@@ -472,14 +472,46 @@ data_loader #(
 reg cs_reset;
 reg [2:0] cs_mod;
 reg [7:0] cs_dips;
+
+reg [7:0] cs_dip_a;
+reg [7:0] cs_dip_b;
+reg [7:0] cs_dip_c;
+reg [7:0] cs_dip_d;
+reg [7:0] cs_dip_e;
+
 always @(posedge clk_74a) begin
   if(bridge_wr) begin
     casex(bridge_addr)
 	  32'h10000000: cs_mod 			<= bridge_wr_data[2:0];
-	  32'h20000000: cs_dips 		<= bridge_wr_data[7:0];
-	  32'h30000000: cs_reset	   <= ~cs_reset;
+	  32'h20000000: cs_dip_a 		<= bridge_wr_data[7:0];
+	  32'h30000000: cs_dip_b 		<= bridge_wr_data[7:0];
+	  32'h40000000: cs_dip_c 		<= bridge_wr_data[7:0];
+	  32'h50000000: cs_dip_d 		<= bridge_wr_data[7:0];
+	  32'h60000000: cs_dip_e 		<= bridge_wr_data[7:0];
+	  32'h80000000: cs_reset	   <= ~cs_reset;
     endcase
   end  
+end
+
+wire mod_pick = cs_mod == 3'd2;
+wire mod_squa = cs_mod == 3'd3;
+wire mod_botanic = cs_mod == 3'd1;
+wire mod_sbag = cs_mod == 3'd4;
+wire mod_bag = cs_mod == 3'd0;
+
+always @(posedge clk_sys) begin
+    casex(cs_mod)
+		3'd0: // bagman
+			cs_dips <= {1'b0, cs_dip_e[0], cs_dip_d[0], cs_dip_c[1:0], cs_dip_b[0], cs_dip_a[1:0]};
+		3'd1: // botanic
+			cs_dips <= {2'b0, cs_dip_d[0], cs_dip_c[1:0], cs_dip_b[0], cs_dip_a[1:0]};
+		3'd2: // pick
+			cs_dips <= {1'b0, cs_dip_e[0], 1'b0, cs_dip_d[0], cs_dip_c[0], cs_dip_b[1:0], cs_dip_a[0]};
+		3'd3: // squash
+			cs_dips <= {1'b1, cs_dip_e[0], cs_dip_d[0], cs_dip_c[1:0], cs_dip_b[1:0], cs_dip_a[0]};
+		3'd4: // super bagman
+			cs_dips <= {1'b0, cs_dip_e[0], cs_dip_d[0], cs_dip_c[1:0], cs_dip_b[0], cs_dip_a[1:0]};
+	 endcase 
 end
 
 // -- reset circuit
@@ -647,15 +679,15 @@ wire m_pause   = joy[8] | joy2[8];
 
 reg [1:0] m_dial1;
 always @(*) begin
-  if (m_down)   m_dial1 <= 2'd1;
-  else if (m_up)     m_dial1 <= 2'd2;
+  if (joy[5])   m_dial1 <= 2'd1;
+  else if (joy[6])     m_dial1 <= 2'd2;
   else               m_dial1 <= 2'd3;
 end
 
 reg [1:0] m_dial2;
 always @(*) begin
-  if (m_down_2) m_dial2 <= 2'd1;
-  else if (m_up_2)   m_dial2 <= 2'd2;
+  if (joy2[5]) m_dial2 <= 2'd1;
+  else if (joy2[6])   m_dial2 <= 2'd2;
   else               m_dial2 <= 2'd3;
 end
 
@@ -664,14 +696,9 @@ end
 // Instance
 ///////////////////////////////////////////////
 wire clk_pix;
-wire pause_cpu;
+wire pause_cpu = osnotify_inmenu_s;
 
 wire reset = ~reset_n | ioctl_download | manual_reset;
-
-wire mod_pick = cs_mod == 3'd2;
-wire mod_squa = cs_mod == 3'd3;
-wire mod_botanic = cs_mod == 3'd1;
-wire mod_sbag = cs_mod == 3'd4;
 
 wire ce_pix;
 
@@ -696,7 +723,7 @@ bagman bagman
 
 	.joy_p1(~{m_fire1,   mod_squa ? m_dial1 : {m_down,   m_up  }, m_right,   m_left,   m_start1 | (mod_sbag & m_fire2),   1'b0, m_coin1}),
 	.joy_p2(~{m_fire1_2, mod_squa ? m_dial2 : {m_down_2, m_up_2}, m_right_2, m_left_2, m_start2 | (mod_sbag & m_fire2_2), mod_botanic, 1'b0  }),
-	.dipsw(cs_dips),
+	.dipsw(~cs_dips),
 
 	.sound_string(audio_l),
 
@@ -704,7 +731,7 @@ bagman bagman
 	.dn_data(ioctl_dout),
 	.dn_wr(ioctl_wr),
 
-  .paused(1'b0),
+  .paused(pause_cpu),
 
   // .hs_data_out(hs_data_out),
   // .hs_data_in(hs_data_in),

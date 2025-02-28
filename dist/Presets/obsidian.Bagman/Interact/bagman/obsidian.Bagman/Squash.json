@@ -1,0 +1,137 @@
+{
+	"interact":{
+		"magic": "APF_VER_1",
+		"variables": [	
+            {
+				"name": "Coinage",
+				"id": 0,
+				"type": "list",
+				"enabled": true,
+				"persist": true,
+				"address": "0x20000000",
+				"writeonly": true,
+				"defaultval": 1,
+				"mask": "0xFFFFFFFE",
+				"options": [
+				  {
+					"value": 1,
+					"name": "2 coins/credit"
+				  },
+				  {
+					"value": 0,
+					"name": "1 coin/credit"
+				  }
+				]
+			},
+            {
+				"name": "Max Points",
+				"id": 1,
+				"type": "list",
+				"enabled": true,
+				"persist": true,
+				"address": "0x30000000",
+				"writeonly": true,
+				"defaultval": 3,
+				"mask": "0xFFFFFFFC",
+				"options": [
+				  {
+					"value": 3,
+					"name": "21"
+				  },
+				  {
+					"value": 2,
+					"name": "15"
+				  },
+				  {
+					"value": 1,
+					"name": "11"
+				  },
+                  {
+					"value": 0,
+					"name": "7"
+				  }                  
+				]
+			},
+            {
+				"name": "Level",
+				"id": 2,
+				"type": "list",
+				"enabled": true,
+				"persist": true,
+				"address": "0x40000000",
+				"writeonly": true,
+				"defaultval": 3,
+				"mask": "0xFFFFFFFC",
+				"options": [
+				  {
+					"value": 3,
+					"name": "Level 1"
+				  },
+                  {
+					"value": 2,
+					"name": "Level 2"
+				  },
+                  {
+					"value": 1,
+					"name": "Level 3"
+				  },
+                  {
+					"value": 0,
+					"name": "Level 4"
+				  }
+				]
+			},
+            {
+				"name": "Language",
+				"id": 3,
+				"type": "list",
+				"enabled": true,
+				"persist": true,
+				"address": "0x50000000",
+				"writeonly": true,
+				"defaultval": 0,
+				"mask": "0xFFFFFFFE",
+				"options": [
+				  {
+					"value": 1,
+					"name": "English"
+				  },
+				  {
+					"value": 0,
+					"name": "Spanish"
+				  }   
+				]
+			},
+            {
+				"name": "Body Fault",
+				"id": 4,
+				"type": "list",
+				"enabled": true,
+				"persist": true,
+				"address": "0x60000000",
+				"writeonly": true,
+				"defaultval": 1,
+				"mask": "0xFFFFFFFE",
+				"options": [
+				  {
+					"value": 1,
+					"name": "On"
+				  },
+				  {
+					"value": 0,
+					"name": "Off"
+				  }   
+				]
+			},
+            {
+                "name": "Reset Core",
+                "id": 5,
+                "type": "action",
+                "enabled": true,
+                "address": "0x80000000",
+                "value": 1
+              }
+		],
+		"messages": []
+	}
+}

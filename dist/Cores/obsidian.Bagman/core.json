@@ -4,11 +4,11 @@
         "metadata": {
             "platform_ids": ["bagman"],
             "shortname": "Bagman",
-            "description": "Stern's Bagman released in 1983.",
+            "description": "Valadon Automation's Bagman.",
             "author": "obsidian",
-            "url": "https://github.com/obsidian-dot-dev/openFPGA-Gyruss",
+            "url": "https://github.com/obsidian-dot-dev/openFPGA-Bagman",
             "version": "0.9.0",
-            "date_release": "2024-08-16"
+            "date_release": "2025-02-28"
         },
         "framework": {
             "target_product": "Analogue Pocket",
